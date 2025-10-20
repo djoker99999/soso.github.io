@@ -119,56 +119,27 @@
       width: 220px;
       height: 220px;
       margin: 0 auto;
-      background: radial-gradient(circle at 30% 30%, #ffffff, #a8e6cf, #64b5f6);
+      background: url('https://i.ibb.co/nqxCW0Pb/t-l-chargement-1-Photoroom.png') no-repeat center center;
+      background-size: contain;
       border-radius: 50%;
       position: relative;
       transition: all 0.3s ease;
       filter: drop-shadow(0 0 20px rgba(100, 181, 246, 0.7));
       z-index: 5;
       overflow: hidden;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
       cursor: pointer;
-    }
-
-    .crystal-ball::before {
-      content: '';
-      position: absolute;
-      top: 10%;
-      left: 20%;
-      width: 30%;
-      height: 30%;
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 50%;
-      filter: blur(5px);
-    }
-
-    .crystal-ball::after {
-      content: '';
-      position: absolute;
-      bottom: 15%;
-      right: 25%;
-      width: 20%;
-      height: 20%;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      filter: blur(4px);
     }
 
     .crystal-ball.easy {
       filter: drop-shadow(0 0 20px rgba(100, 181, 246, 0.8)) brightness(1.1);
-      background: radial-gradient(circle at 30% 30%, #ffffff, #a8e6cf, #64b5f6);
     }
 
     .crystal-ball.medium {
       filter: drop-shadow(0 0 25px rgba(255, 183, 77, 0.8)) brightness(1.1);
-      background: radial-gradient(circle at 30% 30%, #ffffff, #ffd54f, #ffb74d);
     }
 
     .crystal-ball.hard {
       filter: drop-shadow(0 0 30px rgba(244, 67, 54, 0.8)) brightness(1.1);
-      background: radial-gradient(circle at 30% 30%, #ffffff, #ff8a65, #f44336);
       animation: redGlow 2s ease-in-out infinite alternate;
     }
 
@@ -517,14 +488,6 @@
 
     #resetBtn:hover {
       background: linear-gradient(45deg, #777, #999);
-    }
-
-    #changeImageBtn {
-      background: linear-gradient(45deg, #4CAF50, #8BC34A);
-    }
-
-    #changeImageBtn:hover {
-      background: linear-gradient(45deg, #66BB6A, #9CCC65);
     }
 
     #message {
@@ -1013,7 +976,6 @@
 
     <div class="controls">
       <button id="attackBtn">Attaquer (1 coup)</button>
-      <button id="changeImageBtn">Changer l'image</button>
       <button id="resetBtn">Nouvelle Boule</button>
     </div>
 
@@ -1047,22 +1009,10 @@
     let isAttacking = false;
     let audioContext = null;
     let currentDifficulty = "noob";
-    
-    // Liste des images de boules de cristal
-    const crystalImages = [
-      "https://i.ibb.co/Zz6r9Ln2/emoji-boule-cristal-fond-transparent-1232542-51499-Photoroom.png",
-      "https://i.ibb.co/6c7xPr7L/boule-cristal-nebuleuse-mystique-magie-celeste-964799-7959-Photoroom.png",
-      "https://i.ibb.co/nqxCW0Pb/t-l-chargement-1-Photoroom.png",
-      "https://i.ibb.co/MydMfs9M/2bd-JTd-Ahvt-LFL2w1-H5ab2pxtdaw-mobile-Photoroom.png",
-      "https://i.ibb.co/Q30h4yZ9/conception-lampes-lumineuses-futuristes-fantastiques-23-2151101577-Photoroom.png"
-    ];
-    
-    let currentImageIndex = 0;
 
     const crystalBall = document.getElementById("crystalBall");
     const message = document.getElementById("message");
     const attackBtn = document.getElementById("attackBtn");
-    const changeImageBtn = document.getElementById("changeImageBtn");
     const gameContainer = document.getElementById("gameContainer");
     const comboIndicator = document.getElementById("comboIndicator");
     const particlesContainer = document.getElementById("particlesContainer");
@@ -1076,12 +1026,6 @@
     const closePopupBtn = document.getElementById("closePopupBtn");
 
     const impactEffects = ["💥", "🔥", "⭐", "💫", "✨", "💢"];
-
-    // Fonction pour changer l'image de la boule de cristal
-    function changeCrystalImage() {
-      currentImageIndex = (currentImageIndex + 1) % crystalImages.length;
-      crystalBall.style.backgroundImage = `url('${crystalImages[currentImageIndex]}')`;
-    }
 
     // Système audio corrigé
     function initAudioContext() {
@@ -1519,7 +1463,6 @@
 
     // Événements CORRIGÉS
     document.getElementById("attackBtn").addEventListener("click", attack);
-    document.getElementById("changeImageBtn").addEventListener("click", changeCrystalImage);
     document.getElementById("resetBtn").addEventListener("click", initGame);
 
     // Événement de toucher sur la boule de cristal
@@ -1577,10 +1520,6 @@
         case '6':
           setAttackMode(1000);
           break;
-        case 'i':
-        case 'I':
-          changeCrystalImage();
-          break;
         case 'r':
         case 'R':
           initGame();
@@ -1620,9 +1559,8 @@
       }
     }, 1000);
 
-    // Initialiser le jeu et l'image
+    // Initialiser le jeu
     initGame();
-    changeCrystalImage(); // Appliquer la première image
   </script>
 </body>
 </html>
